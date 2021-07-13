@@ -4,11 +4,8 @@
 
 
 
-try {
-
     if (isset($_POST['posttext'])) {
-        $pdo = new PDO('mysql:host=localhost;dbname=mb; charset=utf8', 'homestead', 'secret');
-        $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+        include __DIR__ . '/../includes/connection.php';
 
         $sql = 'INSERT INTO `posts` SET
                 `posttext` = :posttext,
@@ -34,10 +31,6 @@ try {
         echo '<article class="post"><div class="post-text">' . $post['posttext'] . '</div>' .
         '<div class="post-date">Posted on ' . $post['postdate'] . ' by ' . $post['username'] . '</div>' . '</article>';
     }
-
-} catch (PDOException $e) {
-    echo 'An error has occured: ' . $e->getMessage() . ' in ' . $e->getFile() . ':' . $e->getLine();
-}
 
 ?>
 

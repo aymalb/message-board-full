@@ -1,8 +1,7 @@
 <?php
 
 function findUser($username) {
-    $pdo = new PDO('mysql:host=localhost;dbname=mb; charset=utf8', 'homestead', 'secret');
-    $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+    include __DIR__ . '/../includes/connection.php';
 
     $sql = 'SELECT * FROM `users` WHERE `name` = :username';
 
@@ -14,8 +13,7 @@ function findUser($username) {
 }
 
 function register($username, $password) {
-    $pdo = new PDO('mysql:host=localhost;dbname=mb; charset=utf8', 'homestead', 'secret');
-    $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+    include __DIR__ . '/../includes/connection.php';
 
     $sql = 'INSERT INTO `users` SET
             `name` = :username,
@@ -29,8 +27,7 @@ function register($username, $password) {
 }
 
 function login($username, $password) {
-    $pdo = new PDO('mysql:host=localhost;dbname=mb; charset=utf8', 'homestead', 'secret');
-    $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+    include __DIR__ . '/../includes/connection.php';
 
     $sql = 'SELECT * FROM `users` WHERE `name` = :username';
 

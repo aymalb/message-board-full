@@ -19,43 +19,50 @@
 
 include __DIR__ . '/../includes/functions.php';
 
-if (isset($_POST['logout'])) {
-    setcookie('username');
-    setcookie('password');
-    header('location:index.php');
-}
+try {
 
-
-if (isset($_POST['reg-log'])) {
-    switch($_POST['reg-log']) {
-        case 'reg':
-            if (isset($_POST['user']['name']) && $_POST['user']['password'] != '' && count(findUser($_POST['user']['name'])) < 1) {
-                register($_POST['user']['name'], $_POST['user']['password']);
-                echo 'Registration successful!';
-                unset($_POST);
-            } else {
-                echo 'Could not register: input missing or username unavailable or invalid';
-                unset($_POST);
-            }
-            break;
-        
-        case 'log':
-            if (isset($_POST['user']['name']) && isset($_POST['user']['password']) &&
-            count(findUser($_POST['user']['name'])) == 1 && login($_POST['user']['name'], $_POST['user']['password'])) {
-                setcookie('username', $_POST['user']['name'], time() + 3600 * 24 * 365);
-                setcookie('password', findUser($_POST['user']['name'])[0]['password'], time() + 3600 * 24 * 365);
-                header('location:index.php');
-            } else {
-                echo 'Could not log in';
-            }
-            break;
+    if (isset($_POST['logout'])) {
+        setcookie('username');
+        setcookie('password');
+        header('location:index.php');
     }
-}
 
-if (isset($_COOKIE['username']) && isset($_COOKIE['password']) && login($_COOKIE['username'], $_COOKIE['password'])) {
-    include __DIR__ . '/../includes/main.html.php';
-} else {
-    include __DIR__ . '/../includes/login.html.php';
+
+    if (isset($_POST['reg-log'])) {
+        switch($_POST['reg-log']) {
+            case 'reg':
+                if (isset($_POST['user']['name']) && $_POST['user']['password'] != '' && count(findUser($_POST['user']['name'])) < 1) {
+                    register($_POST['user']['name'], $_POST['user']['password']);
+                    echo 'Registration successful!';
+                    unset($_POST);
+                } else {
+                    echo 'Could not register: input missing or username unavailable or invalid';
+                    unset($_POST);
+                }
+                break;
+            
+            case 'log':
+                if (isset($_POST['user']['name']) && isset($_POST['user']['password']) &&
+                count(findUser($_POST['user']['name'])) == 1 && login($_POST['user']['name'], $_POST['user']['password'])) {
+                    setcookie('username', $_POST['user']['name'], time() + 3600 * 24 * 365);
+                    setcookie('password', findUser($_POST['user']['name'])[0]['password'], time() + 3600 * 24 * 365);
+                    header('location:index.php');
+                } else {
+                    echo 'Could not log in';
+                }
+                break;
+        }
+    }
+
+    if (isset($_COOKIE['username']) && isset($_COOKIE['password']) && login($_COOKIE['username'], $_COOKIE['password'])) {
+        include __DIR__ . '/../includes/main.html.php';
+    } else {
+        include __DIR__ . '/../includes/login.html.php';
+    }
+
+
+} catch (PDOException $e) {
+    echo 'An error has occured: ' . $e->getMessage() . ' in ' . $e->getFile() . ':' . $e->getLine();
 }
 
 ?>
