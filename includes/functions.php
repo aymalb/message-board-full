@@ -40,7 +40,7 @@ function login($username, $password) {
 
     $user = $stmt->fetch();
 
-    if (password_verify($password, $user['password'])) {
+    if (password_verify($password, $user['password']) || hash_equals($password, $user['password'])) {
         return true;
     } else {
         return false;

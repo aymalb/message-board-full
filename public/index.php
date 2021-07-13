@@ -52,7 +52,7 @@ if (isset($_POST['reg-log'])) {
     }
 }
 
-if (isset($_COOKIE['username']) && isset($_COOKIE['password'])) {
+if (isset($_COOKIE['username']) && isset($_COOKIE['password']) && login($_COOKIE['username'], $_COOKIE['password'])) {
     include __DIR__ . '/../includes/main.html.php';
 } else {
     include __DIR__ . '/../includes/login.html.php';
