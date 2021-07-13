@@ -1,0 +1,49 @@
+#register-form, #login-form {
+    background-color: rgb(34, 34, 34);
+    color: white;
+}
+
+.selected {
+    background-color: rgb(34, 34, 34);
+    color: white;
+}
+
+#register, #login {
+    display: inline-block;
+    cursor: pointer;
+}
+
+#register:hover, #login:hover {
+    background-color: rgb(34, 34, 34);
+    color: white;
+}
+
+#reg-log {
+    display: grid;
+    grid-template-columns: 100px 100px;
+    grid-template-rows: 20px 50px 20px;
+}
+
+#login {
+    grid-column: 1 / 2;
+    grid-row: 1 / 2;
+}
+
+#register {
+    grid-column: 2 / 3;
+    grid-row: 1 / 2;
+}
+
+#reg-log-form {
+    grid-column: 1 / 3;
+    grid-row: 2 / 3;
+}
+
+#submit {
+    grid-column: 1 / 2;
+    grid-row: 3 / 4;
+}
+
+#register, #login, #register-form, #login-form {
+    padding: 2px;
+}
