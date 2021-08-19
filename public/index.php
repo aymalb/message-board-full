@@ -22,8 +22,8 @@ include __DIR__ . '/../includes/functions.php';
 try {
 
     if (isset($_POST['logout'])) {
-        setcookie('username');
-        setcookie('password');
+        setcookie('username', '', -1);
+        setcookie('password', '', -1);
         header('location:index.php');
     }
 
